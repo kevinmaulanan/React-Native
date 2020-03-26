@@ -48,14 +48,29 @@ export const checkUsername = (data) => {
     return async (dispatch) => {
         try {
             const response = await Axios.post(`http://10.10.10.13:3333/verify`, data)
-            console.log(data)
-            console.log('checkUsername', response.data)
             dispatch({
                 type: 'USER_CHECK_USERNAME',
                 message: response.data.message,
                 success: response.data.success,
                 code: response.data.Code
 
+            })
+        } catch (error) {
+            console.log('error', error.response.data.message)
+        }
+    }
+}
+
+
+export const forgotPassword = (data) => {
+    return async (dispatch) => {
+        try {
+            const response = await Axios.post(`http://10.10.10.13:3333/forgot-password`, data)
+            console.log(data)
+            console.log('forgot Password', response.data)
+            dispatch({
+                type: 'USER_FORGOT_PASSWORD',
+                message: response.data.message,
             })
         } catch (error) {
             console.log('error', error.response.data.message)

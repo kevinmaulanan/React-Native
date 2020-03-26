@@ -12,7 +12,6 @@ class CheckUsernameScreen extends Component {
             username: '',
             images: [],
             message: null,
-
             code: null
         }
     }

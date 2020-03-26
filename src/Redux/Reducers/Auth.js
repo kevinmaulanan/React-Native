@@ -24,7 +24,8 @@ export default function AuthUser(state = globalState, action) {
 
         case 'USER_CHECK_USERNAME':
             return { message: action.message, success: action.success, code: action.code }
-
+        case 'USER_FORGOT_PASSWORD':
+            return { message: action.message }
         default:
             return state
     }
