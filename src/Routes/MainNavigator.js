@@ -8,14 +8,14 @@ class MainNavigator extends Component {
 
 
     render() {
-        console.log(this.props.authData.isLogin)
-        if (this.props.authData.isLogin == false) {
+        console.log('isLogin', this.props.authData.isLogin)
+        if (this.props.authData.isLogin == true) {
             return (
-                <PublicNavigator />
+                <PrivateNavigator />
             )
         } else {
             return (
-                <PrivateNavigator />
+                <PublicNavigator />
             )
 
         }

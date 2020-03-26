@@ -1,7 +1,9 @@
 const globalState = {
     isLogin: false,
     token: '',
-    getUser: {}
+    getUser: {},
+    message: '',
+    success: ''
 }
 
 export default function AuthUser(state = globalState, action) {
@@ -17,6 +19,11 @@ export default function AuthUser(state = globalState, action) {
         case 'USER_LOGGED_OUT_SUCCESS':
             console.log('masuk reducer logout')
             return { isLogin: false, token: '' };
+
+        case 'USER_REGISTER':
+            console.log('success', action.success)
+            return { message: action.playload, success: action.success }
+
         default:
             return state
     }
