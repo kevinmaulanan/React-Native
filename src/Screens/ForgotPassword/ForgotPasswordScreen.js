@@ -1,44 +1,42 @@
 import React, { Component } from 'react'
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, ImageBackground, Image } from 'react-native'
-import { loginUser } from '../../Redux/Actions/Auth'
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, ImageBackground, Image, Alert } from 'react-native'
+import { checkUsername } from '../../Redux/Actions/Auth'
 import { getRestaurant } from '../../Redux/Actions/Restaurant'
 import { connect } from 'react-redux'
 import Icon from 'react-native-vector-icons/FontAwesome5'
 
-class LoginScreen extends Component {
+class ForgotPasswordScreens extends Component {
     constructor(props) {
         super(props)
         this.state = {
             username: '',
-            password: '',
             images: [],
             message: null,
+
+            code: null
         }
     }
 
-    componentDidMount() {
-        this.props.getRestaurant()
-        this.imageSleder()
+
+    handleMessage() {
+        if (this.props.auth.success == false) {
+            this.setState({ message: this.props.auth.message })
+        } else {
+            this.setState({ code: this.props.auth.code })
+            Alert.alert(this.props.auth.message, 'Copy Code Ini=> ' + this.props.auth.code, [
+                { text: 'OK', onPress: () => this.props.navigation.navigate("ForgotPassword") },
+            ])
+        }
     }
 
-    imageSleder() {
-        const data = this.props.dataRestaurant.map((v, i) => {
-            return `http://10.10.10.13:3333${v.image_restaurant}`
-        })
-        console.log(data)
-        this.setState({ images: data })
-    }
-
-    async handleSignIn() {
+    async handleCheckUsername() {
         const data = {
             username: this.state.username,
-            password: this.state.password
         }
         console.log(data)
-
         try {
-            const response = await this.props.loginUser(data)
-            console.log('front login', response)
+            const response = await this.props.checkUsername(data)
+            this.handleMessage()
         } catch (error) {
             console.log('front', error.response.data.message)
             this.setState({ message: error.response.data.message })
@@ -47,7 +45,7 @@ class LoginScreen extends Component {
     }
 
     render() {
-
+        console.log('props auth', this.props.auth)
         return (
 
             <View style={{ flex: 1 }}>
@@ -77,20 +75,20 @@ class LoginScreen extends Component {
                                     />
 
                                 </View>
-                                <View style={{ marginTop: 15 }}>
-                                    <Icon name='lock' color='#000' size={22} style={{ position: 'absolute', left: 10, top: 13 }} />
-                                    <TextInput on placeholder='Password ' style={style.inputEmail} secureTextEntry={true}
-                                        underlineColorAndroid="transparent" onChangeText={password => this.setState({ password })}
-                                    />
-                                </View>
                             </View>
 
 
 
                             <TouchableOpacity style={{ marginHorizontal: 30, marginBottom: 10, backgroundColor: '#229504', borderRadius: 10, height: 50, alignItems: 'center', justifyContent: 'center' }}
-                                onPress={() => this.handleSignIn()}
+                                onPress={() => this.handleCheckUsername()}
                             >
-                                <Text style={{ color: 'white', fontWeight: 'bold' }}>Sign In</Text>
+                                <Text style={{ color: 'white', fontWeight: 'bold' }}>CheckUsername</Text>
+                            </TouchableOpacity>
+
+
+                            <TouchableOpacity style={{ alignSelf: 'center' }}
+                                onPress={() => this.props.navigation.navigate("Login")}>
+                                <Text style={{ fontSize: 13, color: 'blue' }}>Login</Text>
                             </TouchableOpacity>
 
                             <TouchableOpacity style={{ alignSelf: 'center' }}
@@ -98,10 +96,7 @@ class LoginScreen extends Component {
                                 <Text style={{ fontSize: 13, color: 'blue' }}> Create Account</Text>
                             </TouchableOpacity>
 
-                            <TouchableOpacity style={{ alignSelf: 'center' }}
-                                onPress={() => this.props.navigation.navigate("CheckUsername")}>
-                                <Text style={{ fontSize: 13, color: 'blue' }}> Forgot Password</Text>
-                            </TouchableOpacity>
+
 
                         </View>
                     </View>
@@ -131,10 +126,10 @@ const style = StyleSheet.create({
 
 
 const mapStateToProps = state => ({
-    dataRestaurant: state.restaurant.dataRestaurant,
+    auth: state.auth,
 
 })
 
-const mapDispatchToProps = { getRestaurant, loginUser }
+const mapDispatchToProps = { getRestaurant, checkUsername }
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen)
+export default connect(mapStateToProps, mapDispatchToProps)(ForgotPasswordScreens)

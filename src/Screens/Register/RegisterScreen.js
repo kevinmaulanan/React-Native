@@ -64,7 +64,7 @@ class LoginScreen extends Component {
                 }}>
 
                     <View style={{ flex: 5, justifyContent: 'center' }}>
-                        <View style={{ backgroundColor: 'white', justifyContent: 'center', marginHorizontal: 15, borderRadius: 20, height: 450 }}>
+                        <View style={{ backgroundColor: 'white', justifyContent: 'center', marginHorizontal: 15, borderRadius: 20, height: 500 }}>
                             <View style={{ alignItems: 'center' }}>
                                 <Image source={require('../../Asset/logo_Kevman.png')} style={{ height: 30, width: 99, }}></Image>
                             </View>
@@ -72,29 +72,37 @@ class LoginScreen extends Component {
                             <View style={style.wrapFrom}>
 
                                 {this.state.message &&
-                                    <View style={{ borderWidth: 1, borderRadius: 10, marginBottom: 10 }}>
-                                        <Text style={{ backgroundColor: '#F8D7DA', height: 40, color: 'red', textAlignVertical: 'center' }}> {this.state.message} </Text>
+                                    <View style={{backgroundColor: '#F8D7DA', borderWidth: 0, borderRadius: 10, marginBottom: 10 }}>
+                                        <Text style={{ height: 40, color: 'red', textAlignVertical: 'center' }}> {this.state.message} </Text>
                                     </View>
                                 }
 
-                                <View >
-                                    <Icon name='user' color='#000' size={14} />
+                                <View style={{ position: 'relative' }}>
+                                <Icon name='address-book' color='#000' size={22} style={{ position: 'absolute', left: 10, top:13 }} />
                                     <TextInput on placeholder='Input Your Name..... ' style={style.inputText}
                                         underlineColorAndroid="transparent" onChangeText={name => this.setState({ name })}
                                     />
-
                                 </View>
-                                <View style={{ marginTop: 15 }}>
+
+
+                                <View style={{ marginTop: 15 ,position: 'relative'}}>
+                                <Icon name='user' color='#000' size={22} style={{ position: 'absolute', left: 10, top:13 }} />
+                                    
                                     <TextInput on placeholder='Input Your Username ' style={style.inputText}
                                         underlineColorAndroid="transparent" onChangeText={username => this.setState({ username })}
                                     />
                                 </View>
-                                <View style={{ marginTop: 15 }}>
+
+
+                                <View style={{ marginTop: 15,position: 'relative' }}>
+                                <Icon name='lock' color='#000' size={22} style={{ position: 'absolute', left: 10, top:13 }} />
                                     <TextInput on placeholder='Input Your Password ' style={style.inputText} secureTextEntry={true}
                                         underlineColorAndroid="transparent" onChangeText={password => this.setState({ password })}
                                     />
                                 </View>
-                                <View style={{ marginTop: 15 }}>
+
+                                <View style={{ marginTop: 15,position: 'relative' }}>
+                                <Icon name='envelope' color='#000' size={22} style={{ position: 'absolute', left: 10, top:13 }} />
                                     <TextInput on placeholder='Input Your Email ' style={style.inputText}
                                         underlineColorAndroid="transparent" onChangeText={email => this.setState({ email })}
                                     />
@@ -136,7 +144,7 @@ const style = StyleSheet.create({
     wrapFrom: {
         marginHorizontal: 30, marginTop: 20, marginBottom: 30,
     },
-    inputText: { borderBottomColor: '#8A8F9E', borderBottomWidth: 1, height: 50, fontSize: 14, color: '#161F3D', borderWidth: 1, borderRadius: 10, }
+    inputText: { borderBottomColor: '#8A8F9E', borderBottomWidth: 1, height: 50, fontSize: 14, color: '#161F3D', borderWidth: 1, borderRadius: 10,  paddingLeft: 45 }
 })
 
 
