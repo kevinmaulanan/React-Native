@@ -93,7 +93,7 @@ class ForgotPasswordScreens extends Component {
 
                                 <View style={{ marginTop: 15, position: 'relative' }}>
                                     <Icon name='code' color='#000' size={22} style={{ position: 'absolute', left: 10, top: 13 }} />
-                                    <TextInput on placeholder='Username ' style={style.inputEmail}
+                                    <TextInput on placeholder='Code.... ' style={style.inputEmail}
                                         underlineColorAndroid="transparent"
                                         value={this.props.auth.code}
                                         onChangeText={(event) => this.handleCode(event)}
@@ -110,14 +110,18 @@ class ForgotPasswordScreens extends Component {
                                 <View style={{ marginTop: 15, position: 'relative' }}>
                                     <Icon name='key' color='#000' size={22} style={{ position: 'absolute', left: 10, top: 13 }} />
                                     <TextInput on placeholder='New Password..... ' style={style.inputEmail}
-                                        underlineColorAndroid="transparent" onChangeText={newPassword => this.setState({ newPassword })}
+                                        underlineColorAndroid="transparent"
+                                        secureTextEntry={true}
+                                        onChangeText={newPassword => this.setState({ newPassword })}
                                     />
                                 </View>
 
                                 <View style={{ marginTop: 15, position: 'relative' }}>
                                     <Icon name='key' color='#000' size={22} style={{ position: 'absolute', left: 10, top: 13 }} />
                                     <TextInput on placeholder='Confirm Password..... ' style={style.inputEmail}
-                                        underlineColorAndroid="transparent" onChangeText={confirmPassword => this.setState({ confirmPassword })}
+                                        underlineColorAndroid="transparent"
+                                        secureTextEntry={true}
+                                        onChangeText={confirmPassword => this.setState({ confirmPassword })}
                                     />
                                 </View>
                             </View>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, Image, FlatList, ScrollView } from 'react-native'
+import { Text, Image, FlatList, ScrollView, View } from 'react-native'
 import { connect } from 'react-redux'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { getRestaurant } from '../../Redux/Actions/Restaurant'
@@ -12,7 +12,7 @@ class HomeScreen extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            images: ''
+            images: []
         }
     }
 
@@ -32,9 +32,8 @@ class HomeScreen extends Component {
 
     render() {
         return (
-            < ScrollView style={{ flex: 1 }
-            } >
-                <ScrollView style={{ flex: 4 }}>
+            <ScrollView style={{ flex: 1 }} >
+                <View style={{ flex: 4 }}>
                     <SliderBox
                         images={this.state.images}
                         sliderBoxHeight={200}
@@ -43,50 +42,72 @@ class HomeScreen extends Component {
                         }
                         autoplay
                     />
-                </ScrollView>
+                </View>
 
-                <ScrollView style={{ flex: 8 }}>
+
+
+                <View style={{ flex: 8 }}>
                     <FlatList
                         style={{ flex: 1 }}
                         data={this.props.dataRestaurant}
-                        renderItem={({ item, index }) =>
+                        renderItem={({ item }) =>
                             <TouchableOpacity onPress={() => { this.props.navigation.navigate("Detail", { idRestaurant: restaurant.id }) }}>
-                                <ScrollView style={{ flex: 1, flexDirection: 'row', marginBottom: 50, marginTop: 50 }}>
-                                    <ScrollView style={{ flex: 3, margin: 10 }}>
+                                <View style={{ flex: 1, flexDirection: 'row', marginBottom: 50, marginTop: 50 }}>
+                                    <View style={{ flex: 3, margin: 10 }}>
                                         <Image source={{ uri: `http://10.10.10.13:3333${item.image_restaurant}` }} style={{ height: 100, width: 200 }}></Image>
-                                    </ScrollView>
-                                    <ScrollView style={{ flex: 2, margin: 10 }}>
+                                    </View>
+                                    <View style={{ flex: 2, margin: 10 }}>
                                         <Text>{item.restaurant}</Text>
-                                    </ScrollView>
-                                    <ScrollView style={{ flex: 2, margin: 10 }}>
+                                    </View>
+                                    <View style={{ flex: 2, margin: 10 }}>
                                         <Text>{item.description}</Text>
-                                    </ScrollView>
+                                    </View>
 
-                                </ScrollView>
+                                </View>
                             </TouchableOpacity>
                         }
                         keyExtractor={this.props.dataRestaurant.id}
                     >
 
                     </FlatList>
-                </ScrollView>
+                </View>
 
-                <ScrollView style={{ flex: 8, marginLeft: 10 }}>
-                    <ScrollView style={{ flex: 1 }}>
+                <View style={{ flex: 8 }}>
+                    <View style={{ flex: 1 }}>
                         <Text>Items</Text>
-                    </ScrollView>
+                    </View>
 
-                    <ScrollView style={{ flex: 3, flexDirection: "row", }}>
+                    <View style={{ flex: 7 }}>
                         <FlatList
-                            style={{ flex: 1, }}
                             data={this.props.AllDataItems}
-                            numColumns={4}
+                            numColumns={2}
                             renderItem={({ item, index }) =>
-                                <Image source={{ uri: `http://10.10.10.13:3333${item.image_items}` }} style={{ flexDirection: "row-reverse", height: 60, width: 60, margin: 10 }} >
-                                </Image>
+
+                                <Card
+                                    image={{ uri: `http://10.10.10.13:3333${item.image_items}` }}
+                                    containerStyle={{ width: 165, marginLeft: 4 }}
+                                >
+
+                                    {/* <Image source={{ uri: `http://10.10.10.13:3333${item.image_items}` }} style={{ height: 140, width: '100 %', borderRadius: 10 }}></Image> */}
+                                    <View style={{ flex: 2, marginLeft: -1, marginTop: -4 }}>
+                                        <Text style={{ fontSize: 13, color: 'grey' }}>{item.category_detail}</Text>
+                                    </View>
+
+                                    <View style={{ flex: 2, marginLeft: -1, marginTop: 10 }}>
+                                        <Text>{item.name}</Text>
+                                    </View>
+
+                                    <View style={{ flex: 2, marginLeft: -1, marginTop: 10 }}>
+                                        <Text style={{ fontSize: 13, color: 'green' }}>Rp. {item.price},-</Text>
+                                    </View>
+                                </Card>
+
+
+
+
                             } />
-                    </ScrollView>
-                </ScrollView>
+                    </View>
+                </View>
 
             </ScrollView >
 
