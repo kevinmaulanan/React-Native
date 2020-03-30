@@ -4,40 +4,43 @@ const globalState = {
     dataItemsByItems: [],
     dataItemsByRestaurant: [],
     dataItemsBySortName: [],
+    pagePaginationItems: [],
 
 }
 
 export default function itemsReducer(state = globalState, action) {
     switch (action.type) {
 
+
         case 'GET_ALL_ITEMS':
             return {
                 ...state,
-                dataAllItems: action.dataItems
+                dataAllItems: action.dataItems,
+                pagePaginationItems: action.pagePagination
             }
 
         case 'GET_ITEMS_BY_ID_CATEGORY':
             return {
                 ...state,
-                dataItemsByItems: action.dataItems
+                dataItemsByCategory: action.dataItemsByIdCategory
             }
 
         case 'GET_ITEMS_BY_ID_ITEMS':
             return {
                 ...state,
-                dataItemsByItems: action.dataItems
+                dataItemsByItems: action.dataItemsByIdItems
             }
 
         case 'GET_ITEMS_BY_ID_RESTAURANT':
             return {
                 ...state,
-                dataItemsByRestaurant: action.dataItems
+                dataItemsByRestaurant: action.dataItemsByIdRestaurant
             }
 
         case 'GET_ITEMS_BY_SORT_NAME':
             return {
                 ...state,
-                dataItemsBySortName: action.dataItems
+                dataItemsBySortName: action.dataItemsBySortName
             }
 
         default:

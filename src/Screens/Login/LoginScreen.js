@@ -4,6 +4,7 @@ import { loginUser } from '../../Redux/Actions/Auth'
 import { getRestaurant } from '../../Redux/Actions/Restaurant'
 import { connect } from 'react-redux'
 import Icon from 'react-native-vector-icons/FontAwesome5'
+import { BASE_API_URL } from 'react-native-dotenv'
 
 class LoginScreen extends Component {
     constructor(props) {
@@ -18,15 +19,7 @@ class LoginScreen extends Component {
 
     componentDidMount() {
         this.props.getRestaurant()
-        this.imageSleder()
-    }
-
-    imageSleder() {
-        const data = this.props.dataRestaurant.map((v, i) => {
-            return `http://10.10.10.13:3333${v.image_restaurant}`
-        })
-        console.log(data)
-        this.setState({ images: data })
+        console.log('hmm', process.env.REACT_APP_API_URL)
     }
 
     async handleSignIn() {
@@ -38,7 +31,6 @@ class LoginScreen extends Component {
 
         try {
             const response = await this.props.loginUser(data)
-            console.log('front login', response)
         } catch (error) {
             console.log('front', error.response.data.message)
             this.setState({ message: error.response.data.message })
@@ -52,7 +44,7 @@ class LoginScreen extends Component {
 
             <View style={{ flex: 1 }}>
 
-                <ImageBackground source={{ uri: "http://10.10.10.13:3333/uploads/1584781094299.jpeg" }} style={{
+                <ImageBackground source={{ uri: `${BASE_API_URL}/uploads/1584781094299.jpeg` }} style={{
                     width: "100%",
                     height: "100%"
                 }}>

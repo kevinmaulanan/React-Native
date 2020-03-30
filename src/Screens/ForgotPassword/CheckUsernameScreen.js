@@ -4,6 +4,7 @@ import { checkUsername } from '../../Redux/Actions/Auth'
 import { getRestaurant } from '../../Redux/Actions/Restaurant'
 import { connect } from 'react-redux'
 import Icon from 'react-native-vector-icons/FontAwesome5'
+import { BASE_API_URL } from 'react-native-dotenv'
 
 class CheckUsernameScreen extends Component {
     constructor(props) {
@@ -49,7 +50,7 @@ class CheckUsernameScreen extends Component {
 
             <View style={{ flex: 1 }}>
 
-                <ImageBackground source={{ uri: "http://10.10.10.13:3333/uploads/1584781094299.jpeg" }} style={{
+                <ImageBackground source={{ uri: `${BASE_API_URL}/uploads/1584781094299.jpeg` }} style={{
                     width: "100%",
                     height: "100%"
                 }}>

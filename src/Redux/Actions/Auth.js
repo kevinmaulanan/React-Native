@@ -1,9 +1,12 @@
 import Axios from 'axios'
+import { BASE_API_URL } from 'react-native-dotenv'
 
 export const loginUser = (playload) => {
+    console.log(BASE_API_URL)
     return async (dispatch) => {
         try {
-            const response = await Axios.post(`http://10.10.10.13:3333/auth/login`, playload)
+            console.log('2', BASE_API_URL)
+            const response = await Axios.post(`${BASE_API_URL}/auth/login`, playload)
             console.log('jnj', response.data.message)
             dispatch({
                 type: 'AUTH_USER_SUCCESS',
@@ -30,7 +33,7 @@ export const logoutUser = () => {
 export const registerUser = (data) => {
     return async (dispatch) => {
         try {
-            const response = await Axios.post(`http://10.10.10.13:3333/register`, data)
+            const response = await Axios.post(`${BASE_API_URL}/register`, data)
             console.log('Register', response.data.message)
             dispatch({
                 type: 'USER_REGISTER',
@@ -47,7 +50,7 @@ export const registerUser = (data) => {
 export const checkUsername = (data) => {
     return async (dispatch) => {
         try {
-            const response = await Axios.post(`http://10.10.10.13:3333/verify`, data)
+            const response = await Axios.post(`${BASE_API_URL}/verify`, data)
             dispatch({
                 type: 'USER_CHECK_USERNAME',
                 message: response.data.message,
@@ -65,7 +68,7 @@ export const checkUsername = (data) => {
 export const forgotPassword = (data) => {
     return async (dispatch) => {
         try {
-            const response = await Axios.post(`http://10.10.10.13:3333/forgot-password`, data)
+            const response = await Axios.post(`${BASE_API_URL}/forgot-password`, data)
             console.log(data)
             console.log('forgot Password', response.data)
             dispatch({
